@@ -5,6 +5,19 @@ public class Partido {
 	private String equipo2;
 	private int cantidadGolesE1;
 	private int cantidadGolesE2;
+
+
+
+	public Partido() {
+		super();
+	}
+	public Partido(String equipo1, String equipo2, int cantidadGolesE1, int cantidadGolesE2) {
+		super();
+		this.equipo1 = equipo1;
+		this.equipo2 = equipo2;
+		this.cantidadGolesE1 = cantidadGolesE1;
+		this.cantidadGolesE2 = cantidadGolesE2;
+	}
 	public String getEquipo1() {
 		return equipo1;
 	}
@@ -29,7 +42,7 @@ public class Partido {
 	public void setCantidadGolesE2(int cantidadGolesE2) {
 		this.cantidadGolesE2 = cantidadGolesE2;
 	}
-	
+
 	public String equipoGanador() {
 		String ganador; 
 		if (this.cantidadGolesE1>this.cantidadGolesE2) {
