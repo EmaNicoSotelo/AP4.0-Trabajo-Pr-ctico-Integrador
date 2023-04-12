@@ -56,4 +56,11 @@ public class Partido {
 		}
 		return ganador;
 	}
+	@Override
+	public String toString() {
+		return "\nEquipo 1=" + equipo1 + "\nCantidad de goles=" + cantidadGolesE1 + "\n\nEquipo 2=" + equipo2
+				+ "\nCantidad de goles=" + cantidadGolesE2+"\n";
+	}
+	
+	
 }
