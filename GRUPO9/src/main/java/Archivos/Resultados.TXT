@@ -1,0 +1,7 @@
+Ronda,1
+Argentina,1,2,Arabia Saudita
+Polonia,0,0,Mexico
+
+Ronda,2
+Dinamarca,0,0,Tunez
+Francia,4,1,Australia

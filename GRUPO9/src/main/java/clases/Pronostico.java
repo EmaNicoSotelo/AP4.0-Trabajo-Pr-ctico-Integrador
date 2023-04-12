@@ -6,7 +6,7 @@ public class Pronostico {
 	private String rersultado;
 	
 	
-	
+
 	
 	public Pronostico() {
 		super();

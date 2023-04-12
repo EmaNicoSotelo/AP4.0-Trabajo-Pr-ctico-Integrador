@@ -1,5 +1,4 @@
 package clases;
-
 public class Partido {
 	private String equipo1;
 	private String equipo2;

@@ -1,19 +1,44 @@
 package clases;
 
+import java.util.List;
+
 public class Ronda {
-	Partido partidos[] = new Partido[2];
-	Pronostico pronosticos[] = new Pronostico[2];
+	private int numRonda;
+	private List<Partido>partidos;
 
 	public Ronda() {
 		super();
 	}
 
-	public Ronda(Partido[] partidos, Pronostico[] pronosticos) {
+	public Ronda(int numRonda, List<Partido> partidos) {
 		super();
+		this.numRonda = numRonda;
 		this.partidos = partidos;
-		this.pronosticos = pronosticos;
+	}
+	
+	public void agregarPartido(Partido partido1) {
+		this.partidos.add(partido1);
 	}
 
+	public int getNumRonda() {
+		return numRonda;
+	}
+
+	public void setNumRonda(int numRonda) {
+		this.numRonda = numRonda;
+	}
+
+	public List<Partido> getPartidos() {
+		return partidos;
+	}
+
+	public void setPartidos(List<Partido> partidos) {
+		this.partidos = partidos;
+	}
+
+	
+	
+	/*
 	public Partido[] getPartidos() {
 		return partidos;
 	}
@@ -40,5 +65,5 @@ public class Ronda {
 		}
 		return puntaje;
 	}
-
+*/
 }

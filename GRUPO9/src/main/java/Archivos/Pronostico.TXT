@@ -1,0 +1,18 @@
+Participante,Nico
+Argentina,Arabia Saudita,Argentina
+Polonia,Mexico,Empate
+Dinamarca,Tunez,Tunez
+Francia,Australia,Francia
+
+Participante,Ema
+Argentina,Arabia Saudita,Argentina
+Polonia,Mexico,Empate
+Dinamarca,Tunez,Tunez
+Francia,Australia,Francia
+
+Participante,Mati
+Argentina,Arabia Saudita,Argentina
+Polonia,Mexico,Empate
+Dinamarca,Tunez,Tunez
+Francia,Australia,Francia
+
