@@ -89,28 +89,35 @@ public class Main {
 	
 	private static List<Participante> participantes(String Pronosticos) {
 		List<Participante> participantes = new ArrayList<Participante>();
-		List<Pronostico> pronosticos = new ArrayList<Pronostico>();
+		//*List<Pronostico> pronosticos = new ArrayList<Pronostico>();
+		int indiceParticipante = -1;
 		String nombre = "";
 		
 		try {
 			for(String linea : Files.readAllLines(Paths.get(Pronosticos))) {
 				if (linea.split(",")[0].equalsIgnoreCase("Participante")) {
 					nombre = linea.split(",")[1];
+					List<Pronostico> pronosticos1 = new ArrayList<Pronostico>();
+					participantes.add(new Participante(nombre, pronosticos1));
+					indiceParticipante++;
+					
+					
 					
 				}
 				
-				else if (linea.isEmpty()){
+				/*else if (linea.isEmpty()){
 					List<Pronostico> pronostico1 = new ArrayList<Pronostico>(pronosticos);
 					pronosticos.clear();
 					participantes.add(new Participante(nombre, pronostico1));
 					
-				}
-				else {
+				}*/
+				else if(!linea.isEmpty()) {
 					String equipo1 = linea.split(",")[0];
 					String equipo2 = linea.split(",")[1];
 					String resultado = linea.split(",")[2];
 					Pronostico pronostico = new Pronostico(equipo1, equipo2, resultado);
-					pronosticos.add(pronostico);
+					participantes.get(indiceParticipante).agregarPronostico(pronostico);
+					
 				}
 				
 			}

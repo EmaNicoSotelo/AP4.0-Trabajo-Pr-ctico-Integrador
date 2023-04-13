@@ -58,6 +58,8 @@ public class Participante {
 		this.puntos = puntos;
 	}
 	
-
+	public void agregarPronostico(Pronostico pronostico1){
+		this.pronosticos.add(pronostico1);
+	}
 	
 }
