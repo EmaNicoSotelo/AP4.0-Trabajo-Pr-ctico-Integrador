@@ -15,4 +15,3 @@ Argentina,Arabia Saudita,Argentina
 Polonia,Mexico,Empate
 Dinamarca,Tunez,Tunez
 Francia,Australia,Francia
-

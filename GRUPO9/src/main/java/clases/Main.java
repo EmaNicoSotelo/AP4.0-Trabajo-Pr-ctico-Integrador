@@ -50,31 +50,33 @@ public class Main {
 		
 	}
 	
-	private static List<Ronda> rondas(String Resultados) {
+	private static List<Ronda> rondas(String Resultados) {//El problema en esta funcion era que creaba la ronda al encontrarse con una linea vacia y en nuestro archivo no pasaba, asi que para solucionarlo cree la ronda al leer el renglon donde arranca la ronda.
 		List<Ronda> rondas = new ArrayList<Ronda>();
-		List<Partido> partidos = new ArrayList<Partido>();
+		//List<Partido> partidos = new ArrayList<Partido>();
+		int indiceRonda = -1;
 		int numRonda = 0;
 		
 		try {
 			for(String linea : Files.readAllLines(Paths.get(Resultados))) {
 				if (linea.split(",")[0].equalsIgnoreCase("Ronda")) {
 					numRonda = Integer.parseInt(linea.split(",")[1]);
-					
+					List<Partido> partidos1 = new ArrayList<Partido>();
+					rondas.add(new Ronda(numRonda, partidos1));
+					indiceRonda++;
 				}
-				
-				else if (linea.isEmpty()){
+				/*else if (linea.isEmpty()){
 					List<Partido> partidos1 = new ArrayList<Partido>(partidos);
 					partidos.clear();
 					rondas.add(new Ronda(numRonda, partidos1));
 					
-				}
-				else {
+				}*/
+				else if(!linea.isEmpty()) {
 					String equipo1 = linea.split(",")[0];
 					int goles1 = Integer.parseInt(linea.split(",")[1]);
 					String equipo2 = linea.split(",")[3];
 					int goles2 = Integer.parseInt(linea.split(",")[2]);
 					Partido partido = new Partido(equipo1, equipo2, goles1, goles2);
-					partidos.add(partido);
+					rondas.get(indiceRonda).agregarPartido(partido);
 				}
 				
 			}
