@@ -43,7 +43,10 @@ public class Pronostico {
 		this.rersultado = rersultado;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "\nEquipo 1: " + equipo1 + "\nEquipo 2: " + equipo2 + "\nResultado: " + rersultado;
+	}
 	
 	
 }

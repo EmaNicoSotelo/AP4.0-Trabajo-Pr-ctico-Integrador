@@ -6,6 +6,7 @@ import java.util.List;
 public class Participante {
 	private String nombre;
 	private List<Pronostico>pronosticos;
+	private int aciertos;
 	private int puntos;
 	
 	
@@ -61,5 +62,27 @@ public class Participante {
 	public void agregarPronostico(Pronostico pronostico1){
 		this.pronosticos.add(pronostico1);
 	}
+
+
+	public int getAciertos() {
+		return aciertos;
+	}
+
+
+	public void setAciertos(int aciertos) {
+		this.aciertos = aciertos;
+	}
+	
+	public void acierto() {
+		this.puntos++;
+		this.aciertos++;
+	}
+
+
+	public String mostrarResultados() {
+		return nombre + "\t\tAciertos=" + aciertos + "\t Puntos=" + puntos;
+	}
+	
+	
 	
 }
