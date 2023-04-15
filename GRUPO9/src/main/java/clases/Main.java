@@ -3,20 +3,40 @@ package clases;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Main {
 
 	public static void main(String[] args) {
-		String Resultados = "src\\main\\java\\Archivos\\Resultados.txt";
-		String Pronosticos = "src\\main\\java\\Archivos\\Pronostico.txt";
-		String espacio = "********************************************************************";
-		String espacioRonda = "--------------------------------------------------------------------";
 
-		List<Ronda> rondas = rondas(Resultados);
-		List<Participante> participantes = participantes(Pronosticos);
-		partida(rondas, espacio, espacioRonda, participantes);
+
+		try{
+			Class.forName("com.mysql.cj.jdbc.Driver");  
+
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/grupo9","root","12345");  
+
+			Statement stmt=con.createStatement();  	
+
+			//USO DE LA DB  
+			ResultSet rs=stmt.executeQuery("SELECT p.idParticipantes , p.Nombres , c.equipo1, c.equipo2, c.resultado FROM grupo9.participantes p INNER JOIN grupo9.pronosticos c ON p.Nombres = c.participante;"); 
+
+			String Resultados = "src\\main\\java\\Archivos\\Resultados.txt";
+			//String Pronosticos = "src\\main\\java\\Archivos\\Pronostico.txt";
+			String espacio = "********************************************************************";
+			String espacioRonda = "--------------------------------------------------------------------";
+
+			List<Ronda> rondas = rondas(Resultados);
+			List<Participante> participantes = participantes(rs);
+			partida(rondas, espacio, espacioRonda, participantes);
+			
+			con.close(); 
+		}
+		catch(Exception e){ 
+			System.out.println(e);
+		}  
+
 
 	}
 
@@ -91,6 +111,32 @@ public class Main {
 		return rondas;
 	}
 
+	private static List<Participante> participantes(ResultSet rs) {
+		List<Participante> participantes = new ArrayList<Participante>();
+		String nombre = "";
+		try {
+			while(rs.next()) {
+
+				if(!nombre.equalsIgnoreCase(rs.getString(2))) {
+					List<Pronostico> pronosticos = new ArrayList<Pronostico>();
+					participantes.add(new Participante(rs.getString(2), pronosticos));
+					nombre = rs.getString(2);
+				}
+				String equipo1 = rs.getString(3);
+				String equipo2 = rs.getString(4);
+				String resultado = rs.getString(5);
+				Pronostico pronostico = new Pronostico(equipo1, equipo2, resultado);
+				participantes.get(Integer.parseInt(rs.getString(1))-1).agregarPronostico(pronostico);
+			}
+
+
+		}
+		catch(Exception e){ 
+			System.out.println(e);
+		}  
+		return participantes;
+	}
+	/*
 	private static List<Participante> participantes(String Pronosticos) {
 		List<Participante> participantes = new ArrayList<Participante>();
 		int indiceParticipante = -1;
@@ -120,5 +166,5 @@ public class Main {
 			e.printStackTrace();
 		}
 		return participantes;
-	}
+	}*/
 }
