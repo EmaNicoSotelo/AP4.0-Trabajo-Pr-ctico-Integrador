@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 
 public class Main {
 
@@ -28,10 +29,20 @@ public class Main {
 			String espacio = "********************************************************************";
 			String espacioRonda = "--------------------------------------------------------------------";
 			
+			
 			Scanner scn = new Scanner(System.in);
-			System.out.println("Ingrese el valor con el que quiere contabilizar los puntos");
-			String valor = scn.nextLine();
-			int numero = Integer.parseInt(valor);
+			System.out.println("Ingrese el valor de puntos a otorgar por cada acierto:");
+			int numero  = 1;
+			while(true){
+				try {
+	                numero = scn.nextInt();
+	                break;
+	            } catch (InputMismatchException e) {
+	                System.out.print("Por favor ingresa un numero valido: ");
+	                scn.next();
+	            }
+			}
+			
 			List<Ronda> rondas = rondas(Resultados);
 			List<Participante> participantes = participantes(rs,numero);
 			partida(rondas, espacio, espacioRonda, participantes);
