@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.*;
 import java.util.List;
+import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
@@ -20,15 +21,19 @@ public class Main {
 			Statement stmt=con.createStatement();  	
 
 			//USO DE LA DB  
-			ResultSet rs=stmt.executeQuery("SELECT p.idParticipantes , p.Nombres , c.equipo1, c.equipo2, c.resultado FROM grupo9.participantes p INNER JOIN grupo9.pronosticos c ON p.Nombres = c.participante;"); 
+			ResultSet rs=stmt.executeQuery("SELECT num_jugador , participante , equipo1, equipo2, resultado FROM grupo9.pronosticos;"); 
 
 			String Resultados = "src\\main\\java\\Archivos\\Resultados.txt";
 			//String Pronosticos = "src\\main\\java\\Archivos\\Pronostico.txt";
 			String espacio = "********************************************************************";
 			String espacioRonda = "--------------------------------------------------------------------";
-
+			
+			Scanner scn = new Scanner(System.in);
+			System.out.println("Ingrese el valor con el que quiere contabilizar los puntos");
+			String valor = scn.nextLine();
+			int numero = Integer.parseInt(valor);
 			List<Ronda> rondas = rondas(Resultados);
-			List<Participante> participantes = participantes(rs);
+			List<Participante> participantes = participantes(rs,numero);
 			partida(rondas, espacio, espacioRonda, participantes);
 			
 			con.close(); 
@@ -60,6 +65,9 @@ public class Main {
 							.equalsIgnoreCase(rondas.get(i).getPartidos().get(j).equipoGanador())) {
 						participantes.get(k).acierto();
 					}
+					else {
+						participantes.get(k).setPartida_perfecta(false);
+					}
 					System.out.println(espacioRonda);
 				}
 				
@@ -76,7 +84,13 @@ public class Main {
 		}
 		System.out.println("Resultados Finales:");
 		for (int i = 0; i < participantes.size(); i++) {
+			if(participantes.get(i).isPartida_perfecta()) {
+				participantes.get(i).partida_perfecta();
+				System.out.println(participantes.get(i).mostrarResultados()+"   Partida Perfecta!!!\n");
+			}
+			else {
 			System.out.println(participantes.get(i).mostrarResultados()+"\n");
+			}
 		}
 	}
 
@@ -111,7 +125,7 @@ public class Main {
 		return rondas;
 	}
 
-	private static List<Participante> participantes(ResultSet rs) {
+	private static List<Participante> participantes(ResultSet rs,int numero) {
 		List<Participante> participantes = new ArrayList<Participante>();
 		String nombre = "";
 		try {
@@ -120,6 +134,7 @@ public class Main {
 				if(!nombre.equalsIgnoreCase(rs.getString(2))) {
 					List<Pronostico> pronosticos = new ArrayList<Pronostico>();
 					participantes.add(new Participante(rs.getString(2), pronosticos));
+					participantes.get(Integer.parseInt(rs.getString(1))-1).setValor_puntos(numero);;
 					nombre = rs.getString(2);
 				}
 				String equipo1 = rs.getString(3);

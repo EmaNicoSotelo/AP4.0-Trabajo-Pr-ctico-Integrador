@@ -8,7 +8,8 @@ public class Participante {
 	private List<Pronostico>pronosticos;
 	private int aciertos;
 	private int puntos;
-	
+	private int valor_puntos;
+	private boolean partida_perfecta = true;
 	
 	public Participante() {
 		super();
@@ -74,10 +75,34 @@ public class Participante {
 	}
 	
 	public void acierto() {
-		this.puntos++;
+		this.puntos+= this.valor_puntos;
 		this.aciertos++;
 	}
 
+
+	
+	public int getValor_puntos() {
+		return valor_puntos;
+	}
+
+
+	public void setValor_puntos(int valor_puntos) {
+		this.valor_puntos = valor_puntos;
+	}
+
+
+	public boolean isPartida_perfecta() {
+		return partida_perfecta;
+	}
+
+
+	public void setPartida_perfecta(boolean partida_perfecta) {
+		this.partida_perfecta = partida_perfecta;
+	}
+
+	public void partida_perfecta() {
+		this.puntos += 4;
+	}
 
 	public String mostrarResultados() {
 		return nombre + "\t\tAciertos=" + aciertos + "\t Puntos=" + puntos;

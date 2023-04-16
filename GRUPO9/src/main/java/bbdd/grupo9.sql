@@ -23,13 +23,14 @@ DROP TABLE IF EXISTS `pronosticos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pronosticos` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL,
+  `num_jugador` int NOT NULL,
+  `participante` varchar(45) NOT NULL,
   `equipo1` varchar(45) NOT NULL,
   `equipo2` varchar(45) NOT NULL,
   `resultado` varchar(45) NOT NULL,
-  `participante` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +39,7 @@ CREATE TABLE `pronosticos` (
 
 LOCK TABLES `pronosticos` WRITE;
 /*!40000 ALTER TABLE `pronosticos` DISABLE KEYS */;
-INSERT INTO `pronosticos` VALUES (1,'Argentina','Arabia Saudita','Argentina','Nico'),(2,'Polonia','Mexico','Empate','Nico'),(3,'Dinamarca','Tunez','Tunez','Nico'),(4,'Francia','Australia','Francia','Nico'),(5,'Argentina','Arabia Saudita','Argentina','Ema'),(6,'Polonia','Mexico','Empate','Ema'),(7,'Dinamarca','Tunez','Tunez','Ema'),(8,'Francia','Australia','Francia','Ema'),(9,'Argentina','Arabia Saudita','Argentina','Mati'),(10,'Polonia','Mexico','Empate','Mati'),(11,'Dinamarca','Tunez','Tunez','Mati'),(12,'Francia','Australia','Francia','Mati');
+INSERT INTO `pronosticos` VALUES (1,1,'Nico','Argentina','Arabia Saudita','Arabia Saudita'),(2,1,'Nico','Polonia','Mexico','Empate'),(3,1,'Nico','Dinamarca','Tunez','Empate'),(4,1,'Nico','Francia','Australia','Francia'),(5,2,'Ema','Argentina','Arabia Saudita','Argentina'),(6,2,'Ema','Polonia','Mexico','Empate'),(7,2,'Ema','Dinamarca','Tunez','Tunez'),(8,2,'Ema','Francia','Australia','Francia'),(9,3,'Mati','Argentina','Arabia Saudita','Argentina'),(10,3,'Mati','Polonia','Mexico','Empate'),(11,3,'Mati','Dinamarca','Tunez','Tunez'),(12,3,'Mati','Francia','Australia','Francia');
 /*!40000 ALTER TABLE `pronosticos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-15 16:56:19
+-- Dump completed on 2023-04-16 16:33:38
