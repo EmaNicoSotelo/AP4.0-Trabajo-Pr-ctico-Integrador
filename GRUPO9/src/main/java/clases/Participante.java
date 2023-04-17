@@ -10,6 +10,7 @@ public class Participante {
 	private int puntos;
 	private int valor_puntos;
 	private boolean partida_perfecta = true;
+	private boolean ronda_perfecta = true;
 	
 	public Participante() {
 		super();
@@ -23,11 +24,11 @@ public class Participante {
 	}
 
 
-	public Participante(String nombre, List<Pronostico> pronosticos, int puntos) {
+	public Participante(String nombre, List<Pronostico> pronosticos, int valor_puntos) {
 		super();
 		this.nombre = nombre;
 		this.pronosticos = new ArrayList<Pronostico>();
-		this.puntos = puntos;
+		this.valor_puntos = valor_puntos;
 	}
 
 
@@ -101,8 +102,24 @@ public class Participante {
 	}
 
 	public void partida_perfecta() {
-		this.puntos += 4;
+		this.puntos += 2;
 	}
+	
+	
+
+	public boolean isRonda_perfecta() {
+		return ronda_perfecta;
+	}
+
+
+	public void setRonda_perfecta(boolean ronda_perfecta) {
+		this.ronda_perfecta = ronda_perfecta;
+	}
+	
+	public void ronda_perfecta() {
+		this.puntos +=1;
+	}
+
 
 	public String mostrarResultados() {
 		return nombre + "\t\tAciertos=" + aciertos + "\t Puntos=" + puntos;

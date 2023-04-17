@@ -42,7 +42,7 @@ public class Main {
 	                scn.next();
 	            }
 			}
-			
+			scn.close();
 			List<Ronda> rondas = rondas(Resultados);
 			List<Participante> participantes = participantes(rs,numero);
 			partida(rondas, espacio, espacioRonda, participantes);
@@ -78,6 +78,7 @@ public class Main {
 					}
 					else {
 						participantes.get(k).setPartida_perfecta(false);
+						participantes.get(k).setRonda_perfecta(false);
 					}
 					System.out.println(espacioRonda);
 				}
@@ -92,7 +93,13 @@ public class Main {
 
 			}
 			System.out.println("\n\n");
+			for (int l = 0; l < participantes.size(); l++) {
+				if(participantes.get(l).isRonda_perfecta()) {
+					participantes.get(l).ronda_perfecta();
+				}
+			}
 		}
+		
 		System.out.println("Resultados Finales:");
 		for (int i = 0; i < participantes.size(); i++) {
 			if(participantes.get(i).isPartida_perfecta()) {

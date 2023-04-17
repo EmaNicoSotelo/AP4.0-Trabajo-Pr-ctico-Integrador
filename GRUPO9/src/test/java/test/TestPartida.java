@@ -21,11 +21,12 @@ public class TestPartida {
 	
 @BeforeEach
 public void setUp() {
-			
 }
 
 @Test
 void test() {
+	
+	int numero = 1;
 	//Cargo Rondas y Partidos
 	List<Ronda> rondas = new ArrayList<Ronda>();
 	List<Participante> participantes = new ArrayList<Participante>();
@@ -48,24 +49,27 @@ void test() {
 	pronosticos1.add(new Pronostico("Dinamarca", "Tunez", "Tunez"));
 	pronosticos1.add(new Pronostico("Australia", "Francia", "Francia"));
 	participantes.add(new Participante("Nico", pronosticos1));
-	
+	participantes.get(0).setValor_puntos(numero);
 	
 	pronosticos2.add(new Pronostico("Argentina", "Arabia Saudita", "Arabia Saudita"));
 	pronosticos2.add(new Pronostico("Polonia", "Mexico", "Empate"));
 	pronosticos2.add(new Pronostico("Dinamarca", "Tunez", "Tunez"));
 	pronosticos2.add(new Pronostico("Australia", "Francia", "Francia"));
 	participantes.add(new Participante("Ema", pronosticos2));
+	participantes.get(1).setValor_puntos(numero);
+	
+	
     Main.partida(rondas, espacio, espacioRonda, participantes);
     
     //Resultado Jugador 1
-    int AciertosJ1 = participantes.get(0).getAciertos();
+    int AciertosJ1 = participantes.get(0).getPuntos();
     int resultadoEsperadoJ1 = 2;
     Boolean result= (resultadoEsperadoJ1 == AciertosJ1);
     assertTrue(result);
     
     //Resultado Jugador 2
-    int AciertosJ2 = participantes.get(1).getAciertos();
-    int resultadoEsperadoJ2 = 3;
+    int AciertosJ2 = participantes.get(1).getPuntos();
+    int resultadoEsperadoJ2 = 4;
     result = (resultadoEsperadoJ2 == AciertosJ2);
     assertTrue(result);
 }
